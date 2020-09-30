@@ -32,6 +32,7 @@ const se_scraper = require('./../src/node_scraper.js');
 			scrape_job.keywords = [kw];
 			scrape_job.google_settings.q = kw;
 			var results = await scraper.scrape(scrape_job);
+			
 			console.dir(results, {depth: null, colors: true});
        }// end for
 	}// end for
