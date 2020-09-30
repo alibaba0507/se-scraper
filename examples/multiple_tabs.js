@@ -10,7 +10,7 @@ let keywords = ['New York',
     'Los Angeles',
     'Chicago',
     'Houston',
-    'Philadelphia',
+    /*'Philadelphia',
     'Phoenix',
     'San Antonio',
     'San Diego',
@@ -105,24 +105,11 @@ let keywords = ['New York',
     'Fremont',
     'Boise City',
     'Richmond',
-    'San Bernardino'];
+    'San Bernardino'
+	*/
+];
 
-let config = {
-    search_engine: 'bing',
-    debug: false,
-    verbose: true,
-    keywords: keywords,
-    num_pages: 1, // how many pages per keyword
-    output_file: 'examples/results/bing.json',
-    log_ip_address: false,
-    headless: true,
-    puppeteer_cluster_config: {
-        timeout: 10 * 60 * 1000, // max timeout set to 10 minutes
-        monitor: false,
-        concurrency: Cluster.CONCURRENCY_PAGE, // one scraper per tab
-        maxConcurrency: 7, // scrape with 7 tabs
-    }
-};
+
 
 function callback(err, response) {
     if (err) {
@@ -130,5 +117,29 @@ function callback(err, response) {
     }
     console.dir(response, {depth: null, colors: true});
 }
-
-se_scraper.scrape(config, callback);
+(async ()=>{
+	let scrape_job = {
+		search_engine: 'bing',
+		debug: false,
+		verbose: true,
+		keywords: keywords,
+		num_pages: 1, // how many pages per keyword
+		output_file: 'examples/results/bing.json',
+		//log_ip_address: false,
+		headless: true,
+		puppeteer_cluster_config: {
+			timeout: 10 * 60 * 1000, // max timeout set to 10 minutes
+			monitor: false,
+			concurrency: Cluster.CONCURRENCY_PAGE, // one scraper per tab
+			maxConcurrency: 7, // scrape with 7 tabs
+		}
+	};
+   try{
+	var results = await se_scraper.scrape({},scrape_job);
+    console.dir(results, {depth: null, colors: true});
+   }catch (e)
+   {
+	   console.error(">>>>> ERROR [" + e + "]>>>");
+   }
+   //se_scraper.scrape(config, callback);
+})();

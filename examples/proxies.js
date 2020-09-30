@@ -1,5 +1,9 @@
-const se_scraper = require('./../src/node_scraper.js');
+var fs = require('fs');
+var path = require('path');
+var os = require("os");
 
+const se_scraper = require('./../src/node_scraper.js');
+var filepath_proxies = path.join(__dirname, '/data/proxies.txt');
 (async () => {
     let browser_config = {
         output_file: 'examples/results/proxyresults.json',
@@ -7,7 +11,7 @@ const se_scraper = require('./../src/node_scraper.js');
         // a file with one proxy per line. Example:
         // socks5://78.94.172.42:1080
         // http://118.174.233.10:48400
-        proxy_file: '/home/nikolai/.proxies', // one proxy per line
+        proxy_file: filepath_proxies, // one proxy per line
         // whether to use proxies only
         // when this is set to true, se-scraper will not use
         // your default IP address in a browser

@@ -3,8 +3,8 @@ var path = require('path');
 var os = require("os");
 
 const se_scraper = require('./../index.js');
-var filepath_de = path.join(__dirname, '/data/keywords_de.txt');
-
+//var filepath_de = path.join(__dirname, '/data/keywords_de.txt');
+var filepath_de = path.join(__dirname, '/keywords.txt');
 function read_keywords_from_file(fpath) {
     let kws =  fs.readFileSync(fpath).toString().split(os.EOL);
     // clean keywords
@@ -49,9 +49,10 @@ let browser_config = {
         // which search engine to scrape
         search_engine: 'bing',
         // an array of keywords to scrape
-        keywords: keywords_de,
+        //keywords: keywords_de,
+		keyword_file:filepath_de,
         // the number of pages to scrape for each keyword
-        num_pages: 10,
+        num_pages: 1,
 
         // OPTIONAL PARAMS BELOW:
         // https://docs.microsoft.com/en-us/rest/api/cognitiveservices-bingsearch/bing-web-api-v5-reference#query-parameters

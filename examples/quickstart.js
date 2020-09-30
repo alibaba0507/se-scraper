@@ -19,7 +19,7 @@ const se_scraper = require('./../src/node_scraper.js');
         google_settings: {
             "gl": "us",
             "hl": "en",
-            "start": 0,
+            "start": 10,
             "num": 10
         }
     };

@@ -251,12 +251,15 @@ class GoogleScraper extends Scraper {
     }
 
     async search_keyword(keyword) {
-        const input = await this.page.$('input[name="q"]');
-        await this.set_input_value(`input[name="q"]`, keyword);
-        await this.sleep(50);
-        await input.focus();
-        await this.page.keyboard.press("Enter");
-    }
+		if (!this.config.google_settings.q)
+		{
+			const input = await this.page.$('input[name="q"]');
+			await this.set_input_value(`input[name="q"]`, keyword);
+			await this.sleep(50);
+			await input.focus();
+			await this.page.keyboard.press("Enter");
+       }
+	}
 
     async next_page() {
         let next_page_link = await this.page.$('#pnnext', {timeout: 1000});
